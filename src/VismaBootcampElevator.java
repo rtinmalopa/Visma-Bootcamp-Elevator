@@ -108,32 +108,32 @@ public class VismaBootcampElevator {
 //                    goUp();
 //                    fix = false;
 //                } else {
-                    if (currentFloor == downwards.get(0)) {
-                        fix = true;
-                        System.out.println("Doors are opening... Enter please.");
-                        delay(600);
-                        System.out.println("Select your final destination: ");
-                        while (true) {
-                            int number = scanner.nextInt();
-                            if (number >= currentFloor || number < minFloor) {
-                                System.err.println("You have to select lower number!");
-                            } else {
-                                finalDestinations.add(number);
-                                break;
-                            }
+                if (currentFloor == downwards.get(0)) {
+//                        fix = true;
+                    System.out.println("Doors are opening... Enter please.");
+                    delay(600);
+                    System.out.println("Select your final destination: ");
+                    while (true) {
+                        int number = scanner.nextInt();
+                        if (number >= currentFloor || number < minFloor) {
+                            System.err.println("You have to select lower number!");
+                        } else {
+                            finalDestinations.add(number);
+                            break;
                         }
-                        System.out.println("Doors are closing... Hold your hats.");
-                        delay(600);
-                        downwards.remove(0);
-//                    System.out.println("List of downwards:  " + downwards);
                     }
+                    System.out.println("Doors are closing... Hold your hats.");
+                    delay(600);
+                    downwards.remove(0);
+//                    System.out.println("List of downwards:  " + downwards);
+                }
 //                }
             }
             if (downwards.isEmpty() && finalDestinations.isEmpty()) {
-                if (currentFloor > upwards.get(0)) {
+                if (!upwards.isEmpty() && currentFloor > upwards.get(0)) {
                     goDown();
                     fix = true;
-                } else if (currentFloor < upwards.get(0)) {
+                } else if (!upwards.isEmpty() && currentFloor < upwards.get(0)) {
                     goUp();
                     fix = true;
                 } else {
@@ -163,31 +163,31 @@ public class VismaBootcampElevator {
 //                    goDown();
 //                    fix = false;
 //                } else {
-                    if (currentFloor == upwards.get(0)) {
-                        System.out.println("Doors are opening... Enter please.");
-                        delay(600);
-                        System.out.println("Select your final destination: ");
-                        while (true) {
-                            int number = scanner.nextInt();
-                            if (number <= currentFloor || number > maxFloor) {
-                                System.err.println("You have to select higher number!");
-                            } else {
-                                finalDestinations.add(number);
-                                break;
-                            }
+                if (currentFloor == upwards.get(0)) {
+                    System.out.println("Doors are opening... Enter please.");
+                    delay(600);
+                    System.out.println("Select your final destination: ");
+                    while (true) {
+                        int number = scanner.nextInt();
+                        if (number <= currentFloor || number > maxFloor) {
+                            System.err.println("You have to select higher number!");
+                        } else {
+                            finalDestinations.add(number);
+                            break;
                         }
-                        System.out.println("Doors are closing... Hold your hats.");
-                        delay(600);
-                        upwards.remove(0);
-//                    System.out.println("List of downwards:  " + downwards);
                     }
+                    System.out.println("Doors are closing... Hold your hats.");
+                    delay(600);
+                    upwards.remove(0);
+//                    System.out.println("List of downwards:  " + downwards);
+                }
 //                }
             }
             if (upwards.isEmpty() && finalDestinations.isEmpty()) {
-                if (currentFloor < downwards.get(0)) {
+                if (!downwards.isEmpty() && currentFloor < downwards.get(0)) {
                     goUp();
                     fix = true;
-                } else if (currentFloor > downwards.get(0)) {
+                } else if (!downwards.isEmpty() && currentFloor > downwards.get(0)) {
                     goDown();
                     fix = true;
                 } else {

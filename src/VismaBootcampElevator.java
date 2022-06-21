@@ -69,13 +69,10 @@ public class VismaBootcampElevator {
         while (true) {
             String a = scanner.next();
             if (a.equals("-1")) {
-//                System.out.println("Upwards: " + upwards);
-//                System.out.println("Downwards: " + downwards);
                 break;
             } else {
                 if (check(a)) {
                     char direction = lastChar(a);
-//                System.out.println(direction);
                     a = removeLastChar(a);
                     int floor = Integer.parseInt(a);
                     if (direction == '+' && !upwards.contains(floor)) {
@@ -84,9 +81,6 @@ public class VismaBootcampElevator {
                         downwards.add(floor);
                     }
                 }
-//                else{
-//                    System.out.println("Invalid input, please try again.");
-//                }
             }
 
         }
@@ -105,12 +99,7 @@ public class VismaBootcampElevator {
                 finalDestinations.removeAll(Collections.singleton(currentFloor));
             }
             if (!downwards.isEmpty()) {
-//                if (downwards.get(0) > currentFloor) {
-//                    goUp();
-//                    fix = false;
-//                } else {
                 if (currentFloor == downwards.get(0)) {
-//                        fix = true;
                     System.out.println("Doors are opening... Enter please.");
                     delay(600);
                     System.out.println("Select your final destination: ");
@@ -126,9 +115,7 @@ public class VismaBootcampElevator {
                     System.out.println("Doors are closing... Hold your hats.");
                     delay(600);
                     downwards.remove(0);
-//                    System.out.println("List of downwards:  " + downwards);
                 }
-//                }
             }
             if (downwards.isEmpty() && finalDestinations.isEmpty()) {
                 if (!upwards.isEmpty() && currentFloor > upwards.get(0)) {
@@ -148,7 +135,6 @@ public class VismaBootcampElevator {
             } else if (!fix) goDown();
         }
         System.out.println("Elevator state: " + elevatorState);
-//            System.out.println(finalDestinations);
     }
 
     void goUpwards() {
@@ -162,10 +148,6 @@ public class VismaBootcampElevator {
                 finalDestinations.removeAll(Collections.singleton(currentFloor));
             }
             if (!upwards.isEmpty()) {
-//                if (upwards.get(0) < currentFloor) {
-//                    goDown();
-//                    fix = false;
-//                } else {
                 if (currentFloor == upwards.get(0)) {
                     System.out.println("Doors are opening... Enter please.");
                     delay(600);
@@ -182,9 +164,8 @@ public class VismaBootcampElevator {
                     System.out.println("Doors are closing... Hold your hats.");
                     delay(600);
                     upwards.remove(0);
-//                    System.out.println("List of downwards:  " + downwards);
                 }
-//                }
+
             }
             if (upwards.isEmpty() && finalDestinations.isEmpty()) {
                 if (!downwards.isEmpty() && currentFloor < downwards.get(0)) {
@@ -231,19 +212,6 @@ public class VismaBootcampElevator {
             goUpwards();
             goDownwards();
         }
-
-//        if (elevatorState == -1) {
-//            goDownwards();
-//            goUpwards();
-//        }
-//        if (elevatorState == 1) {
-//            goUpwards();
-//            goDownwards();
-//        }
-
-
-//        System.out.println(distanceToUpwards);
-//        System.out.println(distanceToDownwards);
 
         elevatorState = 0;
         finalDestinations.clear();

@@ -50,8 +50,9 @@ public class VismaBootcampElevator {
 
     private boolean check(String s) {
         char sign = lastChar(s);
-        String cislo = s.substring(0, s.length() - 1);
-        if (cislo.equals("12") && sign == '+' || cislo.equals("0") && sign == '-') {
+        String number = s.substring(0, s.length() - 1);
+        int i = Integer.parseInt(number);
+        if (number.equals("12") && sign == '+' || number.equals("0") && sign == '-' || i < 0 || i > 12) {
             System.err.println("Please select valid input");
             return false;
         }
@@ -142,7 +143,9 @@ public class VismaBootcampElevator {
                     break;
                 }
             }
-            if (!fix) goDown();
+            if (!downwards.isEmpty() && currentFloor < downwards.get(0)) {
+                goUp();
+            } else if (!fix) goDown();
         }
         System.out.println("Elevator state: " + elevatorState);
 //            System.out.println(finalDestinations);
@@ -170,7 +173,7 @@ public class VismaBootcampElevator {
                     while (true) {
                         int number = scanner.nextInt();
                         if (number <= currentFloor || number > maxFloor) {
-                            System.err.println("You have to select higher number!");
+                            System.err.println("You have to select lower number!");
                         } else {
                             finalDestinations.add(number);
                             break;
@@ -197,7 +200,9 @@ public class VismaBootcampElevator {
                 }
 
             }
-            if (!fix) goUp();
+            if (!upwards.isEmpty() && currentFloor > upwards.get(0)) {
+                goDown();
+            } else if (!fix) goUp();
         }
         System.out.println("Elevator state: " + elevatorState);
     }
@@ -207,8 +212,12 @@ public class VismaBootcampElevator {
         System.out.println("Upwards: " + upwards);
         System.out.println("Downwards: " + downwards);
 
-        int distanceToUpwards = Math.abs(currentFloor - upwards.get(0));
-        int distanceToDownwards = Math.abs(currentFloor - downwards.get(0));
+        int distanceToUpwards = Integer.MAX_VALUE;
+        int distanceToDownwards = Integer.MAX_VALUE;
+        if (!upwards.isEmpty())
+            distanceToUpwards = Math.abs(currentFloor - upwards.get(0));
+        if (!downwards.isEmpty())
+            distanceToDownwards = Math.abs(currentFloor - downwards.get(0));
 
         System.out.println(distanceToDownwards);
         System.out.println(distanceToUpwards);
@@ -240,6 +249,10 @@ public class VismaBootcampElevator {
         finalDestinations.clear();
         upwards.clear();
         downwards.clear();
+        System.out.println("-------------------------------------");
+        System.out.println("Upwards after clear: " + upwards);
+        System.out.println("Downwards after clear: " + downwards);
+        System.out.println("-------------------------------------");
         System.out.println("Current floor: " + currentFloor);
         run();
     }
